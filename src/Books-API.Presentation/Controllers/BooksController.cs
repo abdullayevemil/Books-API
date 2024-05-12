@@ -15,10 +15,11 @@ public class BooksController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetBooksAsync(int[]? booksIds)
+    [Route("/api/[controller]/[action]/{bookId}")]
+    public async Task<IActionResult> GetBookAsync(int? bookId)
     {
-        var books = await booksService.GetBooksAsync(booksIds);
+        var book = await booksService.GetBookByIdAsync(bookId);
 
-        return base.Ok(books);
+        return base.Ok(book);
     }
 }

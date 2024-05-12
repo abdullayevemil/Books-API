@@ -4,5 +4,5 @@ using Books_API.Core.Models;
 
 public interface IBooksService
 {
-    Task<Book[]> GetBooksAsync(int[]? bookIds);
+    Task<Book> GetBookByIdAsync(int? bookIds);
 }

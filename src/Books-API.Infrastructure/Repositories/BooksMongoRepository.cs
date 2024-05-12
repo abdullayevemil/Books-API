@@ -16,12 +16,14 @@ public class BooksMongoRepository : IBooksRepository
         this.booksDb = this.client.GetDatabase("BooksDb");
     }
 
-    public async Task<Book[]> GetBooksAsync(int[] bookIds)
+    public async Task<Book> GetBookByIdAsync(int bookId)
     {
         var booksCollection = this.booksDb.GetCollection<Book>("Books");
 
-        var books = await booksCollection.FindAsync(book => bookIds.Contains(book.Id));
+        var books = await booksCollection.FindAsync(book => book.Id == bookId);
 
-        return books.ToList().ToArray();
+        var seachedBook = await books.FirstOrDefaultAsync();
+
+        return seachedBook;
     }
 }

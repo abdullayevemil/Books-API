@@ -13,11 +13,11 @@ public class BooksService : IBooksService
         this.bookRepository = bookRepository;
     }
 
-    public async Task<Book[]> GetBooksAsync(int[]? bookIds)
+    public async Task<Book> GetBookByIdAsync(int? bookId)
     {
-        ArgumentNullException.ThrowIfNull(bookIds, nameof(bookIds));
+        ArgumentNullException.ThrowIfNull(bookId, nameof(bookId));
 
-        var books = await this.bookRepository.GetBooksAsync(bookIds);
+        var books = await this.bookRepository.GetBookByIdAsync((int)bookId);
 
         return books;
     }
