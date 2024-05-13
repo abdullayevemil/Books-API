@@ -20,7 +20,18 @@ builder.Services.AddSingleton<IBooksRepository>(options =>
 
 builder.Services.AddSingleton<IBooksService, BooksService>();
 
+builder.Services.AddCors(options => {
+    options.AddPolicy("Users-API", corsBuilder => {
+        corsBuilder
+            .AllowAnyOrigin()
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
+
 var app = builder.Build();
+
+app.UseCors();
 
 app.UseSwagger();
 
